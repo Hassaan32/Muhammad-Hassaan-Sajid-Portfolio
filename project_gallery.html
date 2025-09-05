@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects Gallery | Muhammad Hassaan Sajid</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #e2e8f0;
+            background-color: #0f172a;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: #1e293b;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #3b82f6;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            transition: color 0.3s;
+            color: #cbd5e1;
+        }
+
+        .nav-links a:hover {
+            color: #3b82f6;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            color: #3b82f6;
+            font-weight: 500;
+        }
+
+        .back-btn i {
+            margin-right: 8px;
+        }
+
+        /* Page Title */
+        .page-title {
+            padding: 150px 0 50px;
+            text-align: center;
+        }
+
+        .page-title h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, #3b82f6, #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .page-title p {
+            color: #cbd5e1;
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Filter Section */
+        .filter-section {
+            padding: 30px 0;
+            background: #1e293b;
+            margin-bottom: 50px;
+            border-bottom: 1px solid #334155;
+        }
+
+        .filter-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .filter-group h3 {
+            color: #e2e8f0;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            background: #334155;
+            color: #cbd5e1;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .filter-btn:hover {
+            background: #475569;
+        }
+
+        .filter-btn.active {
+            background: #3b82f6;
+            color: white;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            padding: 0 0 80px;
+        }
+
+        .project-card {
+            background: #1e293b;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s;
+            border: 1px solid #334155;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .project-img {
+            height: 200px;
+            background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-img::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.7) 100%);
+        }
+
+        .project-tags {
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            z-index: 2;
+            display: flex;
+            gap: 8px;
+        }
+
+        .project-tag {
+            padding: 4px 10px;
+            background: rgba(59, 130, 246, 0.8);
+            color: white;
+            border-radius: 15px;
+            font-size: 0.75rem;
+        }
+
+        .project-info {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-info h3 {
+            margin-bottom: 10px;
+            color: #e2e8f0;
+            font-size: 1.4rem;
+        }
+
+        .project-info p {
+            color: #cbd5e1;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .tech-tag {
+            padding: 4px 10px;
+            background: #334155;
+            color: #cbd5e1;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+
+        .project-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #3b82f6;
+            color: white;
+            border-radius: 5px;
+            font-weight: 500;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .project-link:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+        }
+
+        /* No Results Message */
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 60px 0;
+            color: #64748b;
+        }
+
+        .no-results i {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #334155;
+        }
+
+        .no-results h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        /* Footer */
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            padding: 70px 0 20px;
+            border-top: 1px solid #334155;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 50px;
+        }
+
+        .footer-info {
+            flex: 1;
+        }
+
+        .footer-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #3b82f6;
+        }
+
+        .footer-info p {
+            max-width: 300px;
+            margin-bottom: 20px;
+        }
+
+        .footer-contact {
+            flex: 1;
+            text-align: right;
+        }
+
+        .footer-contact h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #3b82f6;
+        }
+
+        .contact-item {
+            margin-bottom: 10px;
+        }
+
+        .social-links {
+            display: flex;
+            margin-top: 20px;
+            justify-content: flex-end;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #1e293b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 10px;
+            transition: all 0.3s;
+            border: 1px solid #334155;
+        }
+
+        .social-link:hover {
+            background: #3b82f6;
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #334155;
+            color: #64748b;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .projects-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+            
+            .filter-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .filter-group {
+                width: 100%;
+                max-width: 500px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .page-title h1 {
+                font-size: 2.2rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 40px;
+            }
+            
+            .footer-contact {
+                text-align: left;
+            }
+            
+            .social-links {
+                justify-content: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">MHS</a>
+                <ul class="nav-links">
+                    <li><a href="index.html#home">Home</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#projects">Projects</a></li>
+                    <li><a href="index.html#skills">Skills</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                    <li><a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Home</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Title -->
+    <section class="page-title">
+        <div class="container">
+            <h1>My Projects</h1>
+            <p>Explore my work across different technologies and project types. Filter to find exactly what you're looking for.</p>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="filter-section">
+        <div class="container">
+            <div class="filter-container">
+                <div class="filter-group">
+                    <h3>Project Type</h3>
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-filter="type-all">All</button>
+                        <button class="filter-btn" data-filter="type-ecommerce">E-Commerce</button>
+                        <button class="filter-btn" data-filter="type-blog">Blog</button>
+                        <button class="filter-btn" data-filter="type-Destopapp">Destop Application</button>
+                        <button class="filter-btn" data-filter="type-webapp">Web Application</button>
+                    </div>
+                </div>
+                
+                <div class="filter-group">
+                    <h3>Technology</h3>
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-filter="tech-all">All</button>
+                        <button class="filter-btn" data-filter="tech-python">Python</button>
+                        <button class="filter-btn" data-filter="tech-tkinter">Tkinter</button>
+                        <button class="filter-btn" data-filter="tech-django">Django</button>
+                        <button class="filter-btn" data-filter="tech-wordpress">WordPress</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Grid -->
+    <section class="projects-container">
+        <div class="container">
+            <div class="projects-grid" id="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-card" data-type="Destopapp" data-tech="python tkinter">
+                    <div class="project-img">
+                        <img src="projects/python/SSMS/images/Main.png" alt="SSMS" style="height: 100%; width: 100%;">
+                        <div class="project-tags">
+                            <span class="project-tag">Destop Application</span>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>SSMS - Stationary Shop Management System</h3>
+                        <p>A desktop-based Stationary Shop Management System with inventory control, sales and purchase management, customer tracking, and automated reporting.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Tkinter</span>
+                            <span class="tech-tag">SQLite3</span>
+                            <span class="tech-tag">MySQL</span>
+                        </div>
+                        <a href="projects/python/SSMS/ssms(stationary_shop_management_system).html" class="project-link">View Project</a>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="project-card" data-type="blog" data-tech="wordpress">
+                    <div class="project-img">
+                        Travel Blog
+                        <div class="project-tags">
+                            <span class="project-tag">Blog</span>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Adventure Travel Blog</h3>
+                        <p>A responsive travel blog with custom WordPress theme, interactive maps, and social sharing features.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">WordPress</span>
+                            <span class="tech-tag">PHP</span>
+                            <span class="tech-tag">JavaScript</span>
+                        </div>
+                        <a href="project-detail.html" class="project-link">View Project</a>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="project-card" data-type="dashboard" data-tech="python react">
+                    <div class="project-img">
+                        Analytics Dashboard
+                        <div class="project-tags">
+                            <span class="project-tag">Dashboard</span>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Business Analytics Dashboard</h3>
+                        <p>Real-time data visualization dashboard with interactive charts and custom reporting capabilities.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">Chart.js</span>
+                        </div>
+                        <a href="project-detail.html" class="project-link">View Project</a>
+                    </div>
+                </div>
+                
+                <!-- Project 4 -->
+                <div class="project-card" data-type="webapp" data-tech="django">
+                    <div class="project-img">
+                        Task Manager
+                        <div class="project-tags">
+                            <span class="project-tag">Web App</span>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Team Task Manager</h3>
+                        <p>A collaborative task management application with real-time updates, team roles, and progress tracking.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Django</span>
+                            <span class="tech-tag">PostgreSQL</span>
+                            <span class="tech-tag">WebSockets</span>
+                        </div>
+                        <a href="project-detail.html" class="project-link">View Project</a>
+                    </div>
+                </div>
+                
+                <!-- Project 5 -->
+                <div class="project-card" data-type="ecommerce" data-tech="wordpress">
+                    <div class="project-img">
+                        Online Bookstore
+                        <div class="project-tags">
+                            <span class="project-tag">E-Commerce</span>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Specialty Bookstore</h3>
+                        <p>An online bookstore with advanced search, book recommendations, and inventory management system.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">WordPress</span>
+                            <span class="tech-tag">WooCommerce</span>
+                            <span class="tech-tag">MySQL</span>
+                        </div>
+                        <a href="project-detail.html" class="project-link">View Project</a>
+                    </div>
+                </div>
+                
+                <!-- Project 6 -->
+                <div class="project-card" data-type="webapp" data-tech="python react">
+                    <div class="project-img">
+                        Weather App
+                        <div class="project-tags">
+                            <span class="project-tag">Web App</span>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Advanced Weather Application</h3>
+                        <p>Weather forecasting application with location detection, severe weather alerts, and historical data.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">Weather API</span>
+                        </div>
+                        <a href="project-detail.html" class="project-link">View Project</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h3>Muhammad Hassaan Sajid</h3>
+                    <p>Web & Python Developer creating functional, beautiful digital experiences that help businesses grow.</p>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact Me</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i> hassaan6688@gmail.com
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i> +92 (348) 666-2274
+                    </div>
+                    <div class="social-links">
+                        <a href="https://github.com/Hassaan32" class="social-link"><i class="fab fa-github"></i></a>
+                        <a href="https://linkedin.com/in/muhammad-hassaan-sajid" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://wa.me/923486662274" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://www.instagram.com/mr_machine_learner" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Muhammad Hassaan Sajid. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get all filter buttons and project cards
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const projectCards = document.querySelectorAll('.project-card');
+            const projectsGrid = document.getElementById('projects-grid');
+            
+            // Add click event listeners to filter buttons
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons in the same group
+                    const buttonGroup = button.parentElement;
+                    const groupButtons = buttonGroup.querySelectorAll('.filter-btn');
+                    groupButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    button.classList.add('active');
+                    
+                    // Apply filters
+                    filterProjects();
+                });
+            });
+            
+            // Function to filter projects based on selected filters
+            function filterProjects() {
+                // Get active filters
+                const typeFilter = document.querySelector('.filter-group:first-child .filter-btn.active').dataset.filter;
+                const techFilter = document.querySelector('.filter-group:last-child .filter-btn.active').dataset.filter;
+                
+                let visibleCount = 0;
+                
+                // Loop through all project cards
+                projectCards.forEach(card => {
+                    const projectType = card.dataset.type;
+                    const projectTech = card.dataset.tech;
+                    
+                    // Check if project matches type filter
+                    const typeMatch = typeFilter === 'type-all' || typeFilter === `type-${projectType}`;
+                    
+                    // Check if project matches tech filter
+                    const techMatch = techFilter === 'tech-all' || projectTech.includes(techFilter.replace('tech-', ''));
+                    
+                    // Show or hide project based on filters
+                    if (typeMatch && techMatch) {
+                        card.style.display = 'flex';
+                        visibleCount++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+                
+                // Show no results message if no projects match the filters
+                let noResults = document.querySelector('.no-results');
+                if (visibleCount === 0) {
+                    if (!noResults) {
+                        noResults = document.createElement('div');
+                        noResults.className = 'no-results';
+                        noResults.innerHTML = `
+                            <i class="fas fa-search"></i>
+                            <h3>No projects found</h3>
+                            <p>Try adjusting your filters to see more results.</p>
+                        `;
+                        projectsGrid.appendChild(noResults);
+                    }
+                } else if (noResults) {
+                    noResults.remove();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
